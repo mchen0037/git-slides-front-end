@@ -20,6 +20,7 @@ class App extends Component {
 
   authenticate(user) {
     console.log('hello from authenticate', user)
+    user === -1 ? alert('Incorrect User Details!') :
     this.setState(
       { loggedIn: true,
         user: {
@@ -30,13 +31,12 @@ class App extends Component {
           user_type: user[0][5]
         }
       });
-    console.log("State is set.")
   }
 
   render() {
     return (
       <div className="App">
-        {console.log(this.state.loggedIn)}
+        <h1>{this.state.loggedIn ? <p>logged in</p> : <p>not logged in</p>}</h1>
         { !this.state.loggedIn ?
           <Login authenticate={this.authenticate}/>
         :
