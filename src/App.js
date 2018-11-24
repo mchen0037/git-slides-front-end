@@ -22,16 +22,16 @@ class App extends Component {
       loggedIn: false,
       user: {
         id: -1,
-        first_name: "User",
-        last_name: "User",
-        user_name: "something@ucm.edu",
+        first_name: "",
+        last_name: "",
+        user_name: "",
         user_type: -1
       }
     }
   }
 
   authenticate(user) {
-    console.log('hello from authenticate', user)
+    // console.log('===\nhello from authenticate', user, "\n===\n")
     user === -1 ? alert('Incorrect User Details!') :
     this.setState(
       { loggedIn: true,
@@ -46,24 +46,26 @@ class App extends Component {
   }
 
   render() {
+    console.log("App state:", this.state)
     return (
       <div className="App">
         <BrowserRouter>
           <div>
             <Switch>
-              <Route exact path="/" component={() => <Home isAuthed={this.state.loggedIn}/>} />
-              <Route exact path="/login" component={Login}/>
+              <Route exact path="/" component={() =>
+                <Home
+                  isAuthed={this.state.loggedIn}
+                  user={this.state.user}
+                />} />
+              <Route exact path="/login" component={() =>
+                <Login
+                  redirect={this.state.loggedIn}
+                  authenticate={this.authenticate}
+                />}/>
               <Route component={Error}/>
             </Switch>
           </div>
         </BrowserRouter>
-        {/* <h1>{this.state.loggedIn ? <p>logged in</p> : <p>not logged in</p>}</h1>
-        { !this.state.loggedIn ?
-          <Login authenticate={this.authenticate}/>
-        :
-        <h1> Logged in as: {this.state.user.first_name} {this.state.user.last_name} </h1>
-
-        } */}
       </div>
 
     );

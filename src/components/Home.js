@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import {Redirect} from 'react-router-dom';
 
 class Home extends Component {
   render() {
-    console.log(this.props)
+    console.log("Home props:", this.props)
     return(
       <div>
         {this.props.isAuthed ?
-          <div>You are logged in!</div> :
+          // FIXME: Render instead the main website of student's classes and stuff.
+          <div>{this.props.user.first_name} is logged in!</div> :
           <div>
-            <Redirect to="/login"/>
+            {console.log("Not logged in.. going to /login!")}
+            <Redirect to="/login/#"/>
           </div>
         }
       </div>
