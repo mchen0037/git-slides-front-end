@@ -14,14 +14,13 @@ class Home extends Component {
     return(
       <div>
         {this.props.isAuthed ?
-          // FIXME: Render instead the main website of student's classes and stuff.
           <div>
             <NavBar/>
-            <Container>
+            <Container fluid>
               <Header>
                 <Segment.Group horizontal>
                   <Segment><SideNav/></Segment>
-                  <Segment><BodyContent/></Segment>
+                  <Segment attached='top'><BodyContent/></Segment>
                 </Segment.Group>
               </Header>
             </Container>

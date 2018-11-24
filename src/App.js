@@ -5,7 +5,6 @@ import Home from "./components/Home.js";
 import {BrowserRouter, Route, Link, Switch} from "react-router-dom";
 
 function Error(props) {
-// console.log(props.location.pathname)
   return(
     <div>
         <h1>404 Error: {props.location.pathname} Not Found</h1>
@@ -19,7 +18,7 @@ class App extends Component {
     super()
     this.authenticate = this.authenticate.bind(this);
     this.state = {
-      loggedIn: true,
+      loggedIn: false,
       user: {
         id: 3,
         first_name: "Mighty",

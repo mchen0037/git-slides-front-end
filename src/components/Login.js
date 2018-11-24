@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
-import './Login.css';
 import {Redirect} from 'react-router-dom';
+import {Container, Segment, Form, Button} from 'semantic-ui-react';
 
 var server = 'http://0.0.0.0:4000/auth'
 
-//TODO: Redesign this page bc it looks ugly lol
 class Login extends Component {
   constructor(props) {
     super(props);
     this.submit = this.submit.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangePass = this.handleChangePass.bind(this);
+    this.state = {
+      email: "",
+      pass: "",
+    }
   }
 
   async submit() {
     console.log('BUTTON CLICKED')
-    var user = ReactDOM.findDOMNode(this.refs.inputEmail).value
-    var password = ReactDOM.findDOMNode(this.refs.inputPassword).value
+    var user = this.state.email
+    var password = this.state.pass
 
     // let auth_response = await
     //   fetch(server, {user, password} );
@@ -25,42 +29,52 @@ class Login extends Component {
     axios.post(
       server, {user, password})
       .then(res => {
-        // console.log(res.data)
+        console.log(res.data)
         this.props.authenticate(res.data)
       });
   }
 
-  //TODO: Use https://github.com/react-bootstrap/react-router-bootstrap to fix button
+  handleChangeEmail(e) {
+    this.setState({
+      email: e.target.value
+    })
+  }
+
+  //will stil have password value even if its dots
+  handleChangePass(e) {
+    this.setState({
+      pass: e.target.value
+    })
+  }
+
   render() {
+    // console.log(this.state.email)
     return (this.props.redirect) ? <Redirect to="/" /> : (
-    // return (
-    // <body id="LoginForm">
-      <div className="container">
-        {/* <h1 className="form-heading">Login</h1> */}
-        <div className="login-form">
-          <div className="main-div">
-            <div className="panel">
-              <h2>Login</h2>
-              <p>Please enter your email and password</p>
-            </div>
-            <form id="Login">
-              <div className="form-group">
-                <input type="email" className="form-control" ref="inputEmail" placeholder="  Email Address"/>
-              </div>
-              <div className="form-group">
-                <input type="password" className="form-control" ref="inputPassword" placeholder="  Password"/>
-              </div>
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onClick={() => {this.submit()}}>
-                Login
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    // </body>
+      <Container text>
+        <Segment padded>
+          <Form>
+            <Form.Input
+              inline label="Email"
+              placeholder="example@ucmerced.edu"
+              value={this.state.email}
+              onChange={this.handleChangeEmail}
+            />
+            <Form.Input
+              inline label="Password"
+              type='password'
+              placeholder="Password"
+              value={this.state.pass}
+              onChange={this.handleChangePass}
+            />
+            <Button
+              type='submit'
+              onClick={()=>{this.submit()}}
+            >
+              Submit
+            </Button>
+          </Form>
+        </Segment>
+      </Container>
     )
   }
 }
