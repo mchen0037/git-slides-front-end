@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 import {Redirect} from 'react-router-dom';
 import SideNav from './SideNav.js';
+import NavBar from './NavBar.js';
 
 class Home extends Component {
   handleItemClick = name => this.setState({ activeItem: name })
@@ -13,6 +14,7 @@ class Home extends Component {
         {this.props.isAuthed ?
           // FIXME: Render instead the main website of student's classes and stuff.
           <div>
+            <NavBar/>
             <h1>{this.props.user.first_name} is logged in!</h1>
             <SideNav/>
           </div>:
