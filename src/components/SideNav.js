@@ -13,8 +13,6 @@ class Sidebar extends Component {
     this.handleItemClick = this.handleItemClick.bind(this);
   }
 
-  // handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
   handleModuleClick(e, clickedModule) {
     //If we click on the same as the active module, close the accordion folder
     //Else, we want to set it to the new one.
@@ -145,33 +143,6 @@ class Sidebar extends Component {
           />
         </Menu.Item>
       </Accordion>
-      // <Accordion as={Menu} vertical>
-      //   <Menu.Item>
-      //     <Accordion.Title
-      //       active={activeModule === 0}
-      //       content='Module 1'
-      //       index={0}
-      //       onClick={this.handleClick}
-      //     />
-      //     <Accordion.Content active={activeModule === 0} content={
-      //       <Accordion>
-      //         {/* //TODO: Look more into https://react.semantic-ui.com/modules/accordion/#advanced-nested */}
-      //
-      //       </Accordion>
-      //
-      //     } />
-      //   </Menu.Item>
-      //
-      //   <Menu.Item>
-      //     <Accordion.Title
-      //       active={activeModule === 1}
-      //       content='Colors'
-      //       index={1}
-      //       onClick={this.handleClick}
-      //     />
-      //     <Accordion.Content active={activeModule === 1} content={ColorForm} />
-      //   </Menu.Item>
-      // </Accordion>
     )
   }
 }

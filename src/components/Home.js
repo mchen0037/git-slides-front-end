@@ -15,7 +15,9 @@ class Home extends Component {
       <div>
         {this.props.isAuthed ?
           <div>
-            <NavBar/>
+            <NavBar
+              user={this.props.user}
+            />
             <Container>
               <Grid>
                 <Grid.Row width={10}>
