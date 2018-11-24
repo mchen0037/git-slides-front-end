@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
-import {Navbar, Nav, NavDropdown, MenuItem} from 'react-bootstrap';
+import {Navbar, Nav, NavDropdown, MenuItem, NavItem} from 'react-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
 
 class NavBar extends Component {
+
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {}
+  //   this.handleClick = this.handleClick.bind(this);
+  // }
+  //
+  // handleClick(e) {
+  //   console.log(e)
+  // }
+
   render() {
     return(
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
-          <Navbar.Brand>
-            Project
-          </Navbar.Brand>
+          <LinkContainer to="/">
+            <Navbar.Brand>
+              Project
+            </Navbar.Brand>
+          </LinkContainer>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
@@ -21,10 +35,23 @@ class NavBar extends Component {
           </Nav>
           <Nav pullRight>
             <NavDropdown eventKey={2} title="Name" id="basic-nav-dropdown">
-              <MenuItem eventKey={2.1}>Settings</MenuItem>
+              {/* <LinkContainer to="/profile">
+                <MenuItem eventKey={2.1}>Profile</MenuItem>
+              </LinkContainer> */}
+              <LinkContainer to="/gradebook">
+                <MenuItem eventKey={2.1}>Gradebook</MenuItem>
+              </LinkContainer>
+              <MenuItem divider />
               <MenuItem eventKey={2.2}>Logout</MenuItem>
             </NavDropdown>
           </Nav>
+          <Nav pullRight>
+          <LinkContainer to="/">
+              <NavItem eventKey={4}>
+                Home
+              </NavItem>
+          </LinkContainer>
+        </Nav>
         </Navbar.Collapse>
       </Navbar>
     )

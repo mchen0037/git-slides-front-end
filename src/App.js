@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Login from "./components/Login.js";
 import Home from "./components/Home.js";
+import Gradebook from "./components/Gradebook.js";
 import {BrowserRouter, Route, Link, Switch} from "react-router-dom";
 
 function Error(props) {
@@ -160,6 +161,11 @@ class App extends Component {
                 <Login
                   redirect={this.state.loggedIn}
                   authenticate={this.authenticate}
+                />}/>
+              <Route exact path="/gradebook" component={() =>
+                <Gradebook
+                  isAuthed={this.state.loggedIn}
+                  user={this.state.user}
                 />}/>
               <Route component={Error}/>
             </Switch>

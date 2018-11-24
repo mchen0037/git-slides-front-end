@@ -55,6 +55,7 @@ class Sidebar extends Component {
                   <Menu.Menu>
                     <Menu.Item
                       name='Presentation 1'
+                      // presentations = 0., exercises = 1.
                       index={0.1}
                       active={this.state.activeItem === 0.1}
                       onClick={this.handleItemClick}
