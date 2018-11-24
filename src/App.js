@@ -18,7 +18,7 @@ class App extends Component {
     super()
     this.authenticate = this.authenticate.bind(this);
     this.state = {
-      loggedIn: false,
+      loggedIn: true,
       user: {
         id: 3,
         first_name: "Mighty",
