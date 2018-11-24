@@ -51,7 +51,7 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Switch>
-              <Route exact path="/" component={Home}/>
+              <Route exact path="/" component={() => <Home isAuthed={this.state.loggedIn}/>} />
               <Route exact path="/login" component={Login}/>
               <Route component={Error}/>
             </Switch>
