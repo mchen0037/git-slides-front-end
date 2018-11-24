@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Login from "./components/Login.js";
 import Home from "./components/Home.js";
-import Gradebook from "./components/Gradebook.js";
+import MyPage from "./components/MyPage.js";
 import {BrowserRouter, Route, Link, Switch} from "react-router-dom";
 
 function Error(props) {
@@ -162,8 +162,8 @@ class App extends Component {
                   redirect={this.state.loggedIn}
                   authenticate={this.authenticate}
                 />}/>
-              <Route exact path="/gradebook" component={() =>
-                <Gradebook
+              <Route exact path="/my" component={() =>
+                <MyPage
                   isAuthed={this.state.loggedIn}
                   user={this.state.user}
                 />}/>

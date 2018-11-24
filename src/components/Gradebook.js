@@ -1,30 +1,35 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
-import NavBar from './NavBar.js';
-import { Container, Header, Segment } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 
 
 class Gradebook extends Component {
   render() {
     return(
       <div>
-        {this.props.isAuthed ?
-          <div>
-            <NavBar/>
-            <Container>
-              <Header>
-                <Segment.Group>
-                  <Segment attached='top'></Segment>
-                  <Segment>Stuff!!</Segment>
-                </Segment.Group>
-              </Header>
-            </Container>
-          </div>:
-          <div>
-            {console.log("Not logged in.. going to /login!")}
-            <Redirect to="/login/#"/>
-          </div>
-        }
+        <Grid columns={2}>
+          <Grid.Column>
+            <Grid.Row>
+              CSE 165
+            </Grid.Row>
+            <Grid.Row>
+              CSE 111
+            </Grid.Row>
+            <Grid.Row>
+              Math 180
+            </Grid.Row>
+          </Grid.Column>
+          <Grid.Column>
+            <Grid.Row>
+              82.4%
+            </Grid.Row>
+            <Grid.Row>
+              89.3%
+            </Grid.Row>
+            <Grid.Row>
+              96.3%
+            </Grid.Row>
+          </Grid.Column>
+        </Grid>
       </div>
 
     )

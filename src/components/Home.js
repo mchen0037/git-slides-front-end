@@ -4,8 +4,7 @@ import {Redirect} from 'react-router-dom';
 import SideNav from './SideNav.js';
 import NavBar from './NavBar.js';
 import BodyContent from './BodyContent.js';
-import { Container, Header, Segment } from 'semantic-ui-react'
-import {Grid} from 'semantic-ui-react';
+import { Container, Grid} from 'semantic-ui-react'
 
 
 class Home extends Component {

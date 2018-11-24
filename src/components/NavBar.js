@@ -35,11 +35,8 @@ class NavBar extends Component {
           </Nav>
           <Nav pullRight>
             <NavDropdown eventKey={2} title="Name" id="basic-nav-dropdown">
-              {/* <LinkContainer to="/profile">
+              <LinkContainer to="/my">
                 <MenuItem eventKey={2.1}>Profile</MenuItem>
-              </LinkContainer> */}
-              <LinkContainer to="/gradebook">
-                <MenuItem eventKey={2.1}>Gradebook</MenuItem>
               </LinkContainer>
               <MenuItem divider />
               <MenuItem eventKey={2.2}>Logout</MenuItem>
