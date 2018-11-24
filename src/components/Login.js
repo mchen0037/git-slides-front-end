@@ -29,6 +29,7 @@ class Login extends Component {
       });
   }
 
+  //TODO: Use https://github.com/react-bootstrap/react-router-bootstrap to fix button
   render() {
     return (this.props.redirect) ? <Redirect to="/" /> : (
     // return (

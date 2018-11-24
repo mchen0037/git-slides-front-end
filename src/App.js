@@ -19,14 +19,114 @@ class App extends Component {
     super()
     this.authenticate = this.authenticate.bind(this);
     this.state = {
-      loggedIn: false,
+      loggedIn: true,
       user: {
-        id: -1,
-        first_name: "",
-        last_name: "",
-        user_name: "",
-        user_type: -1
-      }
+        id: 3,
+        first_name: "Mighty",
+        last_name: "Chen",
+        user_name: "mchen73@ucmerced.edu",
+        user_type: 2
+      },
+      courses: [
+        {
+          name: "Object Oriented Programming",
+          course: "CSE 165",
+          modules: [
+            {
+              name: "Module 1",
+              presentations: [
+                {slides: [
+                  {content: "some content"},
+                  {content: "some content2"},
+                  {content: "some content3"}
+                  ]
+                },
+                {slides: [
+                  {content: "some content4"},
+                  {content: "some content5"},
+                  {content: "some content6"}
+                  ]
+                },
+                {slides: [
+                  {content: "some content7"},
+                  {content: "some content8"},
+                  {content: "some content9"}
+                  ]
+                }
+              ],
+              exercises: [
+                {instructions: "instructions 1"},
+                {instructions: "instructions 2"}
+              ]
+            },
+            {
+              name: "Module 2",
+              presentations: [
+                {slides: [
+                  {content: "some conten10"},
+                  {content: "some content11"}
+                  ]
+                },
+                {slides: [
+                  {content: "some content12"},
+                  {content: "some content13"},
+                  {content: "some content14"}
+                  ]
+                }
+              ],
+              exercises: [
+                {instructions: "instructions 3"},
+                {instructions: "instructions 4"}
+              ]
+            }
+          ]
+        },
+        {
+          name: "Data Structures",
+          course: "CSE 30",
+          modules: [
+            {
+              name: "Module 1",
+              presentations: [
+                {slides: [
+                  {content: "some content"},
+                  {content: "some content2"}
+                  ]
+                },
+                {slides: [
+                  {content: "some content4"},
+                  {content: "some content5"},
+                  {content: "some content6"}
+                  ]
+                }
+              ],
+              exercises: [
+                {instructions: "instructions 1"}
+              ]
+            },
+            {
+              name: "Module 2",
+              presentations: [
+                {slides: [
+                  {content: "some conten10"},
+                  {content: "some content11"}
+                  ]
+                },
+                {slides: [
+                  {content: "some content12"},
+                  {content: "some content13"},
+                  {content: "some content14"}
+                  ]
+                }
+              ],
+              exercises: [
+                {instructions: "instructions 3"},
+                {instructions: "instructions 4"}
+              ]
+            }
+          ]
+        }
+      ]
     }
   }
 
