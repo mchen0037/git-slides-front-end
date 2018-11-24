@@ -6,6 +6,7 @@ import {Redirect} from 'react-router-dom';
 
 var server = 'http://0.0.0.0:4000/auth'
 
+//TODO: Redesign this page bc it looks ugly lol
 class Login extends Component {
   constructor(props) {
     super(props);

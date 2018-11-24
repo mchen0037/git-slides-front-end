@@ -11,18 +11,6 @@ const ColorForm = (
     </Form.Group>
   </Form>
 )
-
-const SizeForm = (
-  <Form>
-    <Form.Group grouped>
-      <Form.Radio label='Small' name='size' type='radio' value='small' />
-      <Form.Radio label='Medium' name='size' type='radio' value='medium' />
-      <Form.Radio label='Large' name='size' type='radio' value='large' />
-      <Form.Radio label='X-Large' name='size' type='radio' value='x-large' />
-    </Form.Group>
-  </Form>
-)
-
 class Sidebar extends Component {
   state = { activeIndex: -1 }
 
@@ -43,11 +31,17 @@ class Sidebar extends Component {
         <Menu.Item>
           <Accordion.Title
             active={activeIndex === 0}
-            content='Size'
+            content='Module 1'
             index={0}
             onClick={this.handleClick}
           />
-          <Accordion.Content active={activeIndex === 0} content={SizeForm} />
+          <Accordion.Content active={activeIndex === 0} content={
+            <Accordion>
+              {/* //TODO: Look more into https://react.semantic-ui.com/modules/accordion/#advanced-nested */}
+
+            </Accordion>
+
+          } />
         </Menu.Item>
 
         <Menu.Item>
