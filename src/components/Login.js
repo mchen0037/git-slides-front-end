@@ -18,11 +18,9 @@ class Login extends Component {
     axios.post(
       server, {user, password})
       .then(res => {
-        // console.log(res);
-        // console.log(this.props.authenticate)
         console.log(res.data)
         this.props.authenticate(res.data)
-      });
+    });
 
     return(
       <div>
