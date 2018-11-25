@@ -25,7 +25,7 @@ class Home extends Component {
   render() {
     // console.log("Home props:", this.props)
     // TODO: Different look if it's an exercise or if it's a Slide?
-    console.log(this.state)
+    // console.log(this.state)
     return(
       <div>
         {this.props.isAuthed ?

@@ -153,7 +153,6 @@ class SideNav extends Component {
   }
 
   render() {
-    console.log("SideNav", this.state)
     return (
       <Accordion as={Menu} vertical>
         {this.state.modules.map( (module, index) =>

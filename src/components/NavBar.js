@@ -46,8 +46,6 @@ class NavBar extends Component {
   }
 
   render() {
-    console.log("NavBar:", this.props.user)
-    console.log("NavBar State:", this.state)
     return(
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
@@ -80,7 +78,11 @@ class NavBar extends Component {
             }
           </Nav>
           <Nav pullRight>
-            <NavDropdown eventKey={2} title="Name" id="basic-nav-dropdown">
+            <NavDropdown
+              eventKey={2}
+              title={this.props.user.first_name + " " + this.props.user.last_name}
+              id="basic-nav-dropdown"
+              >
               <LinkContainer to="/my">
                 <MenuItem eventKey={2.1}>Profile</MenuItem>
               </LinkContainer>
