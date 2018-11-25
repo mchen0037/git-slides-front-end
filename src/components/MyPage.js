@@ -12,7 +12,9 @@ class MyPage extends Component {
       <div>
         {this.props.isAuthed ?
           <div>
-            <NavBar/>
+            <NavBar
+              user={this.props.user}
+            />
             <Container>
               <Grid columns={1}>
                 <Grid.Column>

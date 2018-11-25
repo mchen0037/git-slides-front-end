@@ -58,7 +58,7 @@ class NavBar extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullLeft>
-            {this.state.courses[0] ?
+            {this.state.courses[0] && typeof this.props.currentCourse  === "function" &&
               <NavDropdown eventKey={1} title={this.state.selectedCourse} id="basic-nav-dropdown">
                 {this.state.courses.map( course =>
                   <MenuItem
@@ -69,12 +69,7 @@ class NavBar extends Component {
                     {course.name}
                   </MenuItem>
                 )}
-              </NavDropdown> :
-              <Nav pullLeft>
-                <NavItem>
-                  Loading..
-                </NavItem>
-              </Nav>
+              </NavDropdown>
             }
           </Nav>
           <Nav pullRight>
