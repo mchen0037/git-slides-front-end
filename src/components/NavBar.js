@@ -34,14 +34,14 @@ class NavBar extends Component {
 
   componentDidMount() {
     this.setState({
-      courses: fake_course_info.courses
+      courses: fake_course_info.courses,
+      selectedCourse: fake_course_info.courses[0].name
     })
   }
 
   courseClicked(e, val) {
-    console.log("e:", e.target)
-    console.log("val", val)
-
+    // console.log("e:", e.target)
+    this.props.currentCourse(e.target.id)
     this.setState({ selectedCourse: e.target.innerText})
   }
 

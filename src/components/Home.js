@@ -8,15 +8,31 @@ import { Container, Grid} from 'semantic-ui-react'
 
 
 class Home extends Component {
+
+  constructor(props) {
+    super(props)
+    this.setCurrentCourse = this.setCurrentCourse.bind(this);
+    this.state = {
+      current_course_id: -1
+    }
+  }
+  //course_id from database
+  setCurrentCourse(course_id) {
+    console.log("setCurrentCourse(course_id): ", course_id)
+    this.setState( {current_course_id: course_id})
+  }
+
   render() {
     // console.log("Home props:", this.props)
     // TODO: Different look if it's an exercise or if it's a Slide?
+    console.log(this.state)
     return(
       <div>
         {this.props.isAuthed ?
           <div>
             <NavBar
               user={this.props.user}
+              currentCourse={(course_id) => this.setCurrentCourse(course_id)}
             />
             <Container>
               <Grid>
