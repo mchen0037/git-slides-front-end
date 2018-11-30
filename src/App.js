@@ -19,7 +19,7 @@ class App extends Component {
     super()
     this.authenticate = this.authenticate.bind(this);
     this.state = {
-      loggedIn: true,
+      loggedIn: false,
       user: {
         id: 3,
         first_name: "Mighty",
@@ -32,15 +32,18 @@ class App extends Component {
 
   authenticate(user) {
     // console.log('===\nhello from authenticate', user, "\n===\n")
+    console.log("Authenticating: ", user)
     user === -1 ? alert('Incorrect User Details!') :
     this.setState(
-      { loggedIn: true,
+      {
+        loggedIn: true,
         user: {
-          id: user[0][0],
-          first_name: user[0][1],
-          last_name: user[0][2],
-          user_name: user[0][3],
-          user_type: user[0][5]
+          id: user[0],
+          first_name: user[1],
+          last_name: user[2],
+          user_name: user[3],
+          user_type: user[4],
+          courses: user[5]
         }
       });
   }

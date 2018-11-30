@@ -2,25 +2,6 @@ import React, { Component } from 'react';
 import {Navbar, Nav, NavDropdown, MenuItem, NavItem} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 
-var fake_course_info = {
-  courses: [
-    {
-      id: 1,
-      name: "CSE 165",
-      professor: "Angelo Kyrilov"
-    },
-    {
-      id: 2,
-      name: "CSE 111",
-      professor: "Florin Rusu",
-    },
-    {
-      id: 3,
-      name: "Math 180",
-      professor: "Suzanne Sindi"
-    }
-  ]
-}
 
 class NavBar extends Component {
   constructor(props) {
@@ -33,9 +14,10 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.user)
     this.setState({
-      courses: fake_course_info.courses,
-      selectedCourse: fake_course_info.courses[0].name
+      courses: this.props.user.courses,
+      selectedCourse: this.props.user.courses[0].name
     })
   }
 

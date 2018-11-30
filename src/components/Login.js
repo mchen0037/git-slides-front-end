@@ -3,7 +3,7 @@ import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import {Container, Segment, Form, Button} from 'semantic-ui-react';
 
-var server = 'http://0.0.0.0:4000/auth'
+var server = 'http://172.20.10.2:4000/auth'
 
 class Login extends Component {
   constructor(props) {
@@ -30,6 +30,10 @@ class Login extends Component {
       server, {user, password})
       .then(res => {
         console.log(res.data)
+        if (res.data === -1) {
+          console.log('INCORRECT ID!')
+          //TODO: create bad login prompt.
+        }
         this.props.authenticate(res.data)
       });
   }

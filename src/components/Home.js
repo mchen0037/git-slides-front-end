@@ -13,7 +13,7 @@ class Home extends Component {
     super(props)
     this.setCurrentCourse = this.setCurrentCourse.bind(this);
     this.state = {
-      current_course_id: -1
+      courses: []
     }
   }
   //course_id from database
