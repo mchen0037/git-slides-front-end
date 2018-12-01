@@ -1,31 +1,65 @@
 import React, { Component } from 'react';
 import {Navbar, Nav, NavDropdown, MenuItem, NavItem} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
+import axios from 'axios';
 
+let server = "http://172.20.10.2:4000"
 
 class NavBar extends Component {
   constructor(props) {
     super(props)
     this.courseClicked = this.courseClicked.bind(this);
+    console.log("hello! rerendering NavBar.")
     this.state = {
-      courses: [],
-      selectedCourse: "Courses"
+      courses: this.props.user.courses,
+      //FIXME: The selected course should be up higher because this will re-rerender
+      // the NavBar upon a state update, thus setting the selectedCourse back to 0 every time.
+      // send help.
+      selectedCourse: this.props.user.courses[0].name
     }
   }
 
   componentDidMount() {
     console.log(this.props.user)
-    this.setState({
-      courses: this.props.user.courses,
-      selectedCourse: this.props.user.courses[0].name
-    })
+    // this.setState({
+      // courses: this.props.user.courses,
+      // selectedCourse: this.props.user.courses[0].name
+    // })
   }
 
-  courseClicked(e, val) {
+  async getJSONAsync(id, course){
+  // The await keyword saves us from having to write a .then() block.
+  let json = await axios.get(server + "/modules?user_id=" + id + "&course_id=" + course);
+  console.log('after the call to service');
+  // The result of the GET request is available in the json variable.
+  // We return it just like in a regular synchronous function.
+  return json;
+}
+
+
+  async courseClicked(e, val) {
     this.props.currentCourse(e.target.id)
     this.setState({ selectedCourse: e.target.innerText})
     // QUERY FOR THE COURSE INFO FOR THAT CLASS.
-    
+
+    console.log("courseClicked this.props:",this.props)
+    var id = this.props.user.id
+    var course = e.target.id
+
+    let abc = this.getJSONAsync(id,course);
+    abc.then( res => {
+      console.log("NavBar/courseClicked I GOT THE MODULES:", res.data)
+      this.props.updatemods(res.data)
+      console.log("setMods called.")
+    });
+
+    // axios.get(server + "/modules?user_id=" + id + "&course_id=" + course)
+    //   .then(function(res){
+    //     console.log("NavBar/courseClicked I GOT THE MODULES:", res.data)
+    //     this.props.updatemods(res.data)
+    //     console.log("setMods called.")
+    //   });
+
   }
 
   render() {
@@ -45,8 +79,9 @@ class NavBar extends Component {
               <NavDropdown eventKey={1} title={this.state.selectedCourse} id="basic-nav-dropdown">
                 {this.state.courses.map( course =>
                   <MenuItem
-                    key={1 + (course.id) / 10}
-                    id={1 + (course.id) / 10}
+                    key={course.id}
+                    id={course.id}
+                    // courseid={course.id}
                     onClick={this.courseClicked}
                   >
                     {course.name}

@@ -18,6 +18,7 @@ class App extends Component {
   constructor() {
     super()
     this.authenticate = this.authenticate.bind(this);
+    this.setModules = this.setModules.bind(this);
     this.state = {
       loggedIn: false,
       user: {
@@ -49,8 +50,13 @@ class App extends Component {
       });
   }
 
+  setModules(modules) {
+    // console.log("updatemods:", modules)
+    this.setState({modules: modules})
+  }
+
   render() {
-    // console.log("App state:", this.state)
+    console.log("App state:", this.state)
     return (
       <div className="App">
         <BrowserRouter>
@@ -60,6 +66,7 @@ class App extends Component {
                 <Home
                   isAuthed={this.state.loggedIn}
                   user={this.state.user}
+                  setModules={this.setModules}
                 />} />
               <Route exact path="/login" component={() =>
                 <Login

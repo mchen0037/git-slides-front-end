@@ -110,10 +110,10 @@ class SideNav extends Component {
       activeModule: -1,
       activeItem: -1,
       course_id: this.props.course_id,
-      course: {},
-      modules: [],
-      exercises: [],
-      presentations: []
+      course: this.props.user.courses[0],
+      modules: this.props.user.modules,
+      presentations: fake_oop_presentations.presentations,
+      exercises: fake_oop_exercises.exercises
     }
     this.handleModuleClick = this.handleModuleClick.bind(this);
     this.handleItemClick = this.handleItemClick.bind(this);
@@ -145,10 +145,10 @@ class SideNav extends Component {
     console.log("FIXME: ", this.props)
     this.setState({
       // TODO:grab stuff from DB.
-      course: this.props.user.courses[0],
-      modules: this.props.user.modules,
-      presentations: fake_oop_presentations.presentations,
-      exercises: fake_oop_exercises.exercises
+      // course: this.props.user.courses[0],
+      // modules: this.props.user.modules,
+      // presentations: fake_oop_presentations.presentations,
+      // exercises: fake_oop_exercises.exercises
     })
   }
 

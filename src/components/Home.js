@@ -18,14 +18,12 @@ class Home extends Component {
   }
   //course_id from database
   setCurrentCourse(course_id) {
-    console.log("setCurrentCourse(course_id): ", course_id)
+    // console.log("setCurrentCourse(course_id): ", course_id)
     this.setState( {current_course_id: course_id})
   }
 
   render() {
-    // console.log("Home props:", this.props)
-    // TODO: Different look if it's an exercise or if it's a Slide?
-    // console.log(this.state)
+    console.log("Home props got updated!:", this.props)
     return(
       <div>
         {this.props.isAuthed ?
@@ -33,6 +31,7 @@ class Home extends Component {
             <NavBar
               user={this.props.user}
               currentCourse={(course_id) => this.setCurrentCourse(course_id)}
+              updatemods={(modules) => {console.log("I can see the modules in Home.js", modules); this.props.setModules(modules)}}
             />
             <Container>
               <Grid>
