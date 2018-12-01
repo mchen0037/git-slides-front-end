@@ -39,10 +39,10 @@ class Home extends Component {
                 <Grid.Row width={10}>
                   {/* FIXME: This might break with a lot of modules. */}
                   <Grid.Column width={4} style={{overflow: 'auto', maxHeight: 600 }}>
-                    <SideNav/>
+                    <SideNav user={this.props.user}/>
                   </Grid.Column>
                   <Grid.Column width={12} style={{overflow: 'auto', maxHeight: 600 }}>
-                    <BodyContent/>
+                    <BodyContent user={this.props.user}/>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>

@@ -84,24 +84,23 @@ var fake_oop_exercises = {
   ]
 }
 
-var fake_oop_modules = {
-  modules: [
-    {
-      name: "Module 1",
-      module_id: 1
-    },
-    {
-      name: "Module 2",
-      module_id: 2
-    }
-  ]
-};
+// var fake_oop_modules = {
+//   modules: [
+//     {
+//       name: "Module 1",
+//       module_id: 1
+//     },
+//     {
+//       name: "Module 2",
+//       module_id: 2
+//     }
+//   ]
+// };
 
-var fake_oop_course = {
-  course_id: 1,
-  name: "Objected Oriented Programming",
-  course: "CSE 165"
-}
+// var fake_oop_course = {
+//   course_id: 1,
+//   course: "CSE 165"
+// }
 
 class SideNav extends Component {
 
@@ -143,16 +142,18 @@ class SideNav extends Component {
   // TODO: get modules based on state.course_id.
   // get exercises and presentations for each module.
   componentDidMount() {
+    console.log("FIXME: ", this.props)
     this.setState({
       // TODO:grab stuff from DB.
-      course: fake_oop_course,
-      modules: fake_oop_modules.modules,
+      course: this.props.user.courses[0],
+      modules: this.props.user.modules,
       presentations: fake_oop_presentations.presentations,
       exercises: fake_oop_exercises.exercises
     })
   }
 
   render() {
+    console.log("FIXME: ", this.props)
     return (
       <Accordion as={Menu} vertical>
         {this.state.modules.map( (module, index) =>

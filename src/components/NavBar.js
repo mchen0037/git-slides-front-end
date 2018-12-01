@@ -22,9 +22,10 @@ class NavBar extends Component {
   }
 
   courseClicked(e, val) {
-    // console.log("e:", e.target)
     this.props.currentCourse(e.target.id)
     this.setState({ selectedCourse: e.target.innerText})
+    // QUERY FOR THE COURSE INFO FOR THAT CLASS.
+    
   }
 
   render() {

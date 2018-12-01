@@ -43,7 +43,8 @@ class App extends Component {
           last_name: user[2],
           user_name: user[3],
           user_type: user[4],
-          courses: user[5]
+          courses: user[5],
+          modules: user[6]
         }
       });
   }
