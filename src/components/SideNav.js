@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Menu, Accordion } from 'semantic-ui-react';
+import axios from 'axios';
+
+let server = "http://172.20.10.2:4000"
 
 var fake_oop_presentations = {
   presentations: [
@@ -112,8 +115,8 @@ class SideNav extends Component {
       course_id: this.props.course_id,
       course: this.props.user.courses[0],
       modules: this.props.user.modules,
-      presentations: fake_oop_presentations.presentations,
-      exercises: fake_oop_exercises.exercises
+      presentations: [],
+      exercises: []
     }
     this.handleModuleClick = this.handleModuleClick.bind(this);
     this.handleItemClick = this.handleItemClick.bind(this);
@@ -125,6 +128,36 @@ class SideNav extends Component {
     const index = clickedModule.index
     const activeModule = this.state.activeModule
     const newIndex = (activeModule === index) ? -1 : index
+
+    console.log(index)
+    console.log(activeModule)
+    console.log(newIndex)
+    // console.log(this.props)
+    if (newIndex !== -1) {
+      let module_id = this.props.user.modules[newIndex].module_id;
+      //fix this hardcoded 0 because you need to pass in the selected course id.
+      let course_id = this.props.user.courses[0].id;
+      let user_id = this.props.user.id;
+
+      axios.get(server + "/exercise?user_id=" + user_id +
+      "&course_id=" + course_id +
+      "&module_id=" + module_id)
+        .then(function(res){
+          console.log("EXERCISES:", res.data)
+          // console.log("NavBar/courseClicked I GOT THE MODULES:", res.data)
+          // this.props.updatemods(res.data)
+          // console.log("setMods called.")
+        });
+
+      axios.get(server + "/presentation?user_id=" + user_id +
+      "&course_id=" + course_id +
+      "&module_id=" + module_id)
+        .then(function(res){
+          console.log(res.data)
+          this.setState({presentations: res.data})
+          console.log("set the state!")
+        });
+    }
 
     this.setState({activeModule: newIndex})
   }
@@ -153,7 +186,7 @@ class SideNav extends Component {
   }
 
   render() {
-    console.log("FIXME: ", this.props)
+    console.log("SideNav: ", this.props)
     return (
       <Accordion as={Menu} vertical>
         {this.state.modules.map( (module, index) =>

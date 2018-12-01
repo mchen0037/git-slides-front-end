@@ -34,7 +34,7 @@ class NavBar extends Component {
   // The result of the GET request is available in the json variable.
   // We return it just like in a regular synchronous function.
   return json;
-}
+  }
 
 
   async courseClicked(e, val) {
