@@ -10,14 +10,14 @@ class NavBar extends Component {
   constructor(props) {
     super(props)
     this.courseClicked = this.courseClicked.bind(this);
-    console.log("hello! rerendering NavBar.")
     this.state = {
       courses: this.props.user.courses,
-      //FIXME: The selected course should be up higher because this will re-rerender
-      // the NavBar upon a state update, thus setting the selectedCourse back to 0 every time.
-      // send help.
       selectedCourse: this.props.selectedCourseName
     }
+  }
+
+  componentWillReceiveProps() {
+    this.setState({selectedCourse: this.props.selectedCourseName})
   }
 
   componentDidMount() {

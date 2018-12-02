@@ -71,18 +71,14 @@ class SideNav extends Component {
     this.setState({activeItem: newIndex})
   }
 
+  componentWillReceiveProps() {
+    this.setState({modules: this.props.modules})
+  }
+
   // TODO: get modules based on state.course_id.
   // get exercises and presentations for each module.
-  componentDidMount() {
-    // console.log("FIXME: ", this.props)
-    this.setState({
-      // TODO:grab stuff from DB.
-      // course: this.props.user.courses[0],
-      // modules: this.props.user.modules,
-      // presentations: fake_oop_presentations.presentations,
-      // exercises: fake_oop_exercises.exercises
-    })
-  }
+  // componentDidMount() {
+  // }
 
   render() {
     // console.log("SideNav State: ", this.state)
