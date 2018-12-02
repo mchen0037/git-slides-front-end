@@ -4,107 +4,6 @@ import axios from 'axios';
 
 let server = "http://172.20.10.2:4000"
 
-var fake_oop_presentations = {
-  presentations: [
-    {
-      module_id: 1,
-      presentation_id: 1,
-      title: "Presentation Title 1",
-      slides: [
-        {content: "some content"},
-        {content: "some content2"},
-        {content: "some content3"}
-      ]
-    },
-    {
-      module_id: 1,
-      presentation_id: 2,
-      title: "Presentation Title 2",
-      slides: [
-        {content: "some content4"},
-        {content: "some content5"},
-        {content: "some content6"}
-      ]
-    },
-    {
-      module_id: 1,
-      presentation_id: 3,
-      title: "Presentation Title 3",
-      slides: [
-        {content: "some content7"},
-        {content: "some content8"},
-        {content: "some content9"}
-      ]
-    },
-    {
-      module_id: 2,
-      presentation_id: 4,
-      title: "Presentation Title 4",
-      slides: [
-        {content: "some content10"},
-        {content: "some content11"}
-      ]
-    },
-    {
-      module_id: 2,
-      presentation_id: 5,
-      title: "Presentation Title 5",
-      slides: [
-        {content: "some content12"},
-        {content: "some content13"},
-        {content: "some content14"}
-      ]
-    }
-  ]
-};
-
-var fake_oop_exercises = {
-  exercises: [
-    {
-      module_id: 1,
-      name: "Exercise 1",
-      exercise_id: 1,
-      instructions: "instructions 1"
-    },
-    {
-      module_id: 1,
-      name: "Exercise 2",
-      exercise_id: 2,
-      instructions: "instructions 2"
-    },
-    {
-      module_id: 2,
-      name: "Exercise 3",
-      exercise_id: 3,
-      instructions: "instructions 3"
-    },
-    {
-      module_id: 2,
-      name: "Exercise 4",
-      exercise_id: 4,
-      instructions: "instructions 4"
-    }
-  ]
-}
-
-// var fake_oop_modules = {
-//   modules: [
-//     {
-//       name: "Module 1",
-//       module_id: 1
-//     },
-//     {
-//       name: "Module 2",
-//       module_id: 2
-//     }
-//   ]
-// };
-
-// var fake_oop_course = {
-//   course_id: 1,
-//   course: "CSE 165"
-// }
-
 class SideNav extends Component {
 
   constructor(props) {
@@ -114,7 +13,7 @@ class SideNav extends Component {
       activeItem: -1,
       course_id: this.props.course_id,
       course: this.props.user.courses[0],
-      modules: this.props.user.modules,
+      modules: this.props.modules,
       presentations: [],
       exercises: []
     }
@@ -129,9 +28,9 @@ class SideNav extends Component {
     const activeModule = this.state.activeModule
     const newIndex = (activeModule === index) ? -1 : index
 
-    console.log(index)
-    console.log(activeModule)
-    console.log(newIndex)
+    // console.log(index)
+    // console.log(activeModule)
+    // console.log(newIndex)
     // console.log(this.props)
     if (newIndex !== -1) {
       let module_id = this.props.user.modules[newIndex].module_id;
@@ -143,7 +42,7 @@ class SideNav extends Component {
       "&course_id=" + course_id +
       "&module_id=" + module_id)
         .then(function(res){
-          console.log("EXERCISES:", res.data)
+          // console.log("EXERCISES:", res.data)
           // console.log("NavBar/courseClicked I GOT THE MODULES:", res.data)
           // this.props.updatemods(res.data)
           // console.log("setMods called.")
@@ -153,9 +52,9 @@ class SideNav extends Component {
       "&course_id=" + course_id +
       "&module_id=" + module_id)
         .then(function(res){
-          console.log(res.data)
+          // console.log(res.data)
           this.setState({presentations: res.data})
-          console.log("set the state!")
+          // console.log("set the state!")
         });
     }
 
@@ -175,7 +74,7 @@ class SideNav extends Component {
   // TODO: get modules based on state.course_id.
   // get exercises and presentations for each module.
   componentDidMount() {
-    console.log("FIXME: ", this.props)
+    // console.log("FIXME: ", this.props)
     this.setState({
       // TODO:grab stuff from DB.
       // course: this.props.user.courses[0],
@@ -186,7 +85,7 @@ class SideNav extends Component {
   }
 
   render() {
-    console.log("SideNav: ", this.props)
+    // console.log("SideNav State: ", this.state)
     return (
       <Accordion as={Menu} vertical>
         {this.state.modules.map( (module, index) =>

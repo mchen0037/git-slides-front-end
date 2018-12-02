@@ -3,7 +3,8 @@ import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import {Container, Segment, Form, Button} from 'semantic-ui-react';
 
-var server = 'http://172.20.10.2:4000/auth'
+// var server = 'http://172.20.10.2:4000/auth'
+var server = 'http://0.0.0.0:4000/auth'
 
 class Login extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Login extends Component {
   }
 
   async submit() {
-    console.log('BUTTON CLICKED')
+    // console.log('LOGIN BUTTON CLICKED')
     var user = this.state.email
     var password = this.state.pass
 
@@ -29,10 +30,9 @@ class Login extends Component {
     axios.post(
       server, {user, password})
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data === -1) {
           console.log('INCORRECT ID!')
-          //TODO: create bad login prompt.
         }
         this.props.authenticate(res.data)
       });

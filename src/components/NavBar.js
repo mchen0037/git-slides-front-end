@@ -3,7 +3,8 @@ import {Navbar, Nav, NavDropdown, MenuItem, NavItem} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import axios from 'axios';
 
-let server = "http://172.20.10.2:4000"
+// let server = "http://172.20.10.2:4000"
+let server = "http://0.0.0.0:4000"
 
 class NavBar extends Component {
   constructor(props) {
@@ -15,15 +16,14 @@ class NavBar extends Component {
       //FIXME: The selected course should be up higher because this will re-rerender
       // the NavBar upon a state update, thus setting the selectedCourse back to 0 every time.
       // send help.
-      selectedCourse: this.props.user.courses[0].name
+      selectedCourse: this.props.selectedCourseName
     }
   }
 
   componentDidMount() {
-    console.log(this.props.user)
+    // console.log(this.props.user)
     // this.setState({
-      // courses: this.props.user.courses,
-      // selectedCourse: this.props.user.courses[0].name
+    //   selectedCourse: this.props.selectedCourseName
     // })
   }
 
@@ -38,31 +38,23 @@ class NavBar extends Component {
 
 
   async courseClicked(e, val) {
-    this.props.currentCourse(e.target.id)
+    // console.log("<<<<<<<<<<<<<<<<<<<<courseClicked props:", this.props)
+    this.props.currentCourse(e.target.id, e.target.innerText)
     this.setState({ selectedCourse: e.target.innerText})
     // QUERY FOR THE COURSE INFO FOR THAT CLASS.
 
-    console.log("courseClicked this.props:",this.props)
     var id = this.props.user.id
     var course = e.target.id
 
     let abc = this.getJSONAsync(id,course);
     abc.then( res => {
-      console.log("NavBar/courseClicked I GOT THE MODULES:", res.data)
       this.props.updatemods(res.data)
-      console.log("setMods called.")
     });
-
-    // axios.get(server + "/modules?user_id=" + id + "&course_id=" + course)
-    //   .then(function(res){
-    //     console.log("NavBar/courseClicked I GOT THE MODULES:", res.data)
-    //     this.props.updatemods(res.data)
-    //     console.log("setMods called.")
-    //   });
-
   }
 
   render() {
+    console.log("NavBar State: ", this.state)
+    console.log("NavBar Props:" , this.props)
     return(
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
