@@ -19,18 +19,12 @@ class Login extends Component {
   }
 
   async submit() {
-    // console.log('LOGIN BUTTON CLICKED')
     var user = this.state.email
     var password = this.state.pass
 
-    // let auth_response = await
-    //   fetch(server, {user, password} );
-
-    // console.log(auth_response)
     axios.post(
       server, {user, password})
       .then(res => {
-        // console.log(res.data)
         if (res.data === -1) {
           console.log('INCORRECT ID!')
         }
@@ -44,7 +38,6 @@ class Login extends Component {
     })
   }
 
-  //will stil have password value even if its dots
   handleChangePass(e) {
     this.setState({
       pass: e.target.value

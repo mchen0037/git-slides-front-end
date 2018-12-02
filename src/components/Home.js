@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
 import {Redirect} from 'react-router-dom';
 import SideNav from './SideNav.js';
 import NavBar from './NavBar.js';
@@ -25,12 +24,12 @@ class Home extends Component {
   }
 
   setModules(modules) {
-    console.log("Setting Modules in Home!", modules)
+    // console.log("Setting Modules in Home!", modules)
     this.setState({modules: modules})
   }
 
   render() {
-    console.log("Home State:" , this.state)
+    // console.log("Home State:" , this.state)
     // console.log("Home Props:" , this.props)
     return(
       <div>

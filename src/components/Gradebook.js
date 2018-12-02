@@ -9,26 +9,18 @@ class Gradebook extends Component {
         {/* FIXME: switch rows and columns? */}
         <Grid columns={2}>
           <Grid.Column>
-            <Grid.Row>
-              <b>CSE 165</b>
-            </Grid.Row>
-            <Grid.Row>
-              <b>CSE 111</b>
-            </Grid.Row>
-            <Grid.Row>
-              <b>Math 180</b>
-            </Grid.Row>
+            {this.props.grades.map((grade, index) =>
+              <Grid.Row key={index}>
+                <b>{grade.title}</b>
+              </Grid.Row>
+            )}
           </Grid.Column>
           <Grid.Column>
-            <Grid.Row>
-              82.4%
-            </Grid.Row>
-            <Grid.Row>
-              89.3%
-            </Grid.Row>
-            <Grid.Row>
-              96.3%
-            </Grid.Row>
+            {this.props.grades.map((grade, index) =>
+              <Grid.Row key={index}>
+                {grade.grade}%
+              </Grid.Row>
+            )}
           </Grid.Column>
         </Grid>
       </div>

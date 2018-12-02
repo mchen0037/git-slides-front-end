@@ -20,17 +20,10 @@ class NavBar extends Component {
     this.setState({selectedCourse: this.props.selectedCourseName})
   }
 
-  componentDidMount() {
-    // console.log(this.props.user)
-    // this.setState({
-    //   selectedCourse: this.props.selectedCourseName
-    // })
-  }
-
   async getJSONAsync(id, course){
   // The await keyword saves us from having to write a .then() block.
   let json = await axios.get(server + "/modules?user_id=" + id + "&course_id=" + course);
-  console.log('after the call to service');
+
   // The result of the GET request is available in the json variable.
   // We return it just like in a regular synchronous function.
   return json;
@@ -46,15 +39,15 @@ class NavBar extends Component {
     var id = this.props.user.id
     var course = e.target.id
 
-    let abc = this.getJSONAsync(id,course);
-    abc.then( res => {
+    let request = this.getJSONAsync(id,course);
+    request.then( res => {
       this.props.updatemods(res.data)
     });
   }
 
   render() {
-    console.log("NavBar State: ", this.state)
-    console.log("NavBar Props:" , this.props)
+    // console.log("NavBar State: ", this.state)
+    // console.log("NavBar Props:" , this.props)
     return(
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
@@ -73,7 +66,6 @@ class NavBar extends Component {
                   <MenuItem
                     key={course.id}
                     id={course.id}
-                    // courseid={course.id}
                     onClick={this.courseClicked}
                   >
                     {course.name}

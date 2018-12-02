@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Grid, Image, Segment, Header } from 'semantic-ui-react'
+import { Grid, Segment, Header } from 'semantic-ui-react';
+// import {Image} from 'semantic-ui-react';
 
-var picture = '../assets/img/deafult_picture.png'
+// var picture = '../assets/img/deafult_picture.png'
 
 class Gradebook extends Component {
   render() {
@@ -12,17 +13,17 @@ class Gradebook extends Component {
             <Grid.Column width={2}>
               <Grid.Row>
                 {/* FIXME: Image not working? */}
-                <Image src={picture} size='small' circular />
+                {/* <Image src={picture} size='small' circular /> */}
               </Grid.Row>
             </Grid.Column>
             <Grid.Column width={14}>
               <Grid.Row>
                 <Header>
-                  Mighty Chen
+                  {this.props.user.first_name} {this.props.user.last_name}
                 </Header>
               </Grid.Row>
               <Grid.Row>
-                Email: mchen73@ucmerced.edu
+                Email: {this.props.user.user_name}
               </Grid.Row>
               <Grid.Row>
                 Student Standing: Senior

@@ -7,6 +7,35 @@ import Profile from './Profile.js';
 
 
 class MyPage extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state=({
+      grades:[{title:"class",grade:0}]
+    })
+  }
+
+  componentDidMount() {
+    //axios call to get the grades
+    this.setState(
+      {
+        grades:[
+          {
+            title: "CSE 165",
+            grade: 89.5
+          },
+          {
+            title: "CSE 111",
+            grade: 94.2
+          },
+          {
+            title: "MATH 180",
+            grade: 100
+          }
+        ]
+    })
+  }
+
   render() {
     return(
       <div>
@@ -19,11 +48,11 @@ class MyPage extends Component {
               <Grid columns={1}>
                 <Grid.Column>
                   <Grid.Row width={10}>
-                    <Profile/>
+                    <Profile user={this.props.user}/>
                   </Grid.Row>
                   <Grid.Row width={10}>
                     <Segment>
-                      <Gradebook/>
+                      <Gradebook grades={this.state.grades}/>
                     </Segment>
                   </Grid.Row>
                 </Grid.Column>

@@ -32,7 +32,7 @@ class App extends Component {
 
   authenticate(user) {
     // console.log('===\nhello from authenticate', user, "\n===\n")
-    console.log("Authenticating: ", user)
+    // console.log("Authenticating: ", user)
     user === -1 ? alert('Incorrect User Details!') :
     this.setState(
       {
