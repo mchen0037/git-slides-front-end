@@ -15,7 +15,11 @@ class Home extends Component {
     this.state = {
       // courses: [],
       modules: [],
-      selectedCourseName: "Courses"
+      selectedCourseName: "Courses",
+      //When someone clicks on a module, update the state's presentation.
+      presentation: {
+        slides: []
+      }
     }
   }
   //course_id from database
@@ -27,6 +31,15 @@ class Home extends Component {
     // console.log("Setting Modules in Home!", modules)
     this.setState({modules: modules})
   }
+
+  //TODO: helloo
+  // setPresentation(modules) {
+  //
+  // }
+  //
+  // setSlides() {
+  //
+  // }
 
   render() {
     // console.log("Home State:" , this.state)
@@ -53,7 +66,10 @@ class Home extends Component {
                       />
                     </Grid.Column>
                     <Grid.Column width={12} style={{overflow: 'auto', maxHeight: 600 }}>
-                      <BodyContent user={this.props.user}/>
+                      <BodyContent user={this.props.user}
+                        presentation={this.state.presentation}
+
+                      />
                     </Grid.Column>
                   </Grid.Row>
                 </Grid>

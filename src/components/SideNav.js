@@ -69,6 +69,38 @@ class SideNav extends Component {
     const newIndex = (activeItem === index) ? -1 : index
 
     this.setState({activeItem: newIndex})
+
+    //FIXME: hard coded now but please fix..
+    let module_id = 41;
+    let user_id = 1;
+    let course_id = 21;
+    let presentation_id = 41;
+
+    // TODO: update the Presentation BODY whenever you click on a presentation or exercise.
+    //TODO: How to differentiate between exercise and presentation??
+    axios.get(server + "/slides?user_id=" + user_id +
+    "&course_id=" + course_id +
+    "&module_id=" + module_id +
+    "&presentation_id=" + presentation_id)
+      .then(function(res){
+        // console.log("EXERCISES:", res.data)
+        // console.log("NavBar/courseClicked I GOT THE MODULES:", res.data)
+        // this.props.updatemods(res.data)
+        // console.log("setMods called.")
+      });
+
+    let exercise_id = 81;
+    //TODO: Same as above but for exercises?
+    axios.get(server + "/exercise/instructions?user_id=" + user_id +
+    "&course_id=" + course_id +
+    "&module_id=" + module_id +
+    "&exercise_id=" + exercise_id)
+      .then(function(res){
+        // console.log("EXERCISES:", res.data)
+        // console.log("NavBar/courseClicked I GOT THE MODULES:", res.data)
+        // this.props.updatemods(res.data)
+        // console.log("setMods called.")
+      });
   }
 
   componentWillReceiveProps() {

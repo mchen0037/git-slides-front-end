@@ -11,14 +11,14 @@ class Gradebook extends Component {
           <Grid.Column>
             {this.props.grades.map((grade, index) =>
               <Grid.Row key={index}>
-                <b>{grade.title}</b>
+                <b>{grade.course_name}</b>
               </Grid.Row>
             )}
           </Grid.Column>
           <Grid.Column>
             {this.props.grades.map((grade, index) =>
               <Grid.Row key={index}>
-                {grade.grade}%
+                {grade.grade * 100}%
               </Grid.Row>
             )}
           </Grid.Column>

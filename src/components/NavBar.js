@@ -3,8 +3,8 @@ import {Navbar, Nav, NavDropdown, MenuItem, NavItem} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import axios from 'axios';
 
-// let server = "http://172.20.10.2:4000"
-let server = "http://0.0.0.0:4000"
+let server = "http://172.20.10.2:4000"
+// let server = "http://0.0.0.0:4000"
 
 class NavBar extends Component {
   constructor(props) {
