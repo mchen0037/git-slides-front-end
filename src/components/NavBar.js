@@ -3,8 +3,8 @@ import {Navbar, Nav, NavDropdown, MenuItem, NavItem} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import axios from 'axios';
 
-let server = "http://172.20.10.2:4000"
-// let server = "http://0.0.0.0:4000"
+// let server = "http://172.20.10.2:4000"
+let server = "http://0.0.0.0:4000"
 
 class NavBar extends Component {
   constructor(props) {
@@ -23,7 +23,6 @@ class NavBar extends Component {
   async getJSONAsync(id, course){
   // The await keyword saves us from having to write a .then() block.
   let json = await axios.get(server + "/modules?user_id=" + id + "&course_id=" + course);
-
   // The result of the GET request is available in the json variable.
   // We return it just like in a regular synchronous function.
   return json;
@@ -41,7 +40,7 @@ class NavBar extends Component {
 
     let request = this.getJSONAsync(id,course);
     request.then( res => {
-      this.props.updatemods(res.data)
+      this.props.updatemods(res.data);
     });
   }
 

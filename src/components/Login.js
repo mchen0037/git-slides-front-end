@@ -3,8 +3,8 @@ import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import {Container, Segment, Form, Button} from 'semantic-ui-react';
 
-var server = 'http://172.20.10.2:4000/auth'
-// var server = 'http://0.0.0.0:4000/auth'
+// var server = 'http://172.20.10.2:4000/auth'
+var server = 'http://0.0.0.0:4000'
 
 class Login extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class Login extends Component {
     var password = this.state.pass
 
     axios.post(
-      server, {user, password})
+      server + "/auth", {user, password})
       .then(res => {
         if (res.data === -1) {
           console.log('INCORRECT ID!')

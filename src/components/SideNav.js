@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Menu, Accordion } from 'semantic-ui-react';
 import axios from 'axios';
 
-let server = "http://172.20.10.2:4000"
+// let server = "http://172.20.10.2:4000"
+let server = "http://0.0.0.0:4000"
 
 class SideNav extends Component {
 
@@ -104,6 +105,7 @@ class SideNav extends Component {
   }
 
   componentWillReceiveProps() {
+    console.log(this.props)
     this.setState({modules: this.props.modules})
   }
 

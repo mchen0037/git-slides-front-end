@@ -6,7 +6,8 @@ import Gradebook from './Gradebook.js';
 import Profile from './Profile.js';
 import axios from 'axios';
 
-let server = "http://172.20.10.2:4000"
+// let server = "http://172.20.10.2:4000"
+let server = "http://0.0.0.0:4000";
 
 class MyPage extends Component {
 
@@ -17,41 +18,17 @@ class MyPage extends Component {
     })
   }
 
-  // UI Stuff.
-  componentDidMount() {
-    //axios call to get the grades
-    // console.log(this.props)
-    console.log("componentDidMount")
-    let user_id = this.props.user.id
-    axios.get(server + "/gradebook?user_id=" + user_id)
-      .then(function(res){
-        console.log(res.data)
-        this.setState(
-          {
-              grades: res.data
-          })
-      });
-    // this.setState(
-    //   {
-    //     grades:[
-    //       {
-    //         title: "CSE 165",
-    //         grade: 89.5
-    //       },
-    //       {
-    //         title: "CSE 111",
-    //         grade: 94.2
-    //       },
-    //       {
-    //         title: "MATH 180",
-    //         grade: 100
-    //       }
-    //     ]
-    // })
+  async getGrades(user_id){
+  // The await keyword saves us from having to write a .then() block.
+  let json = await axios.get(server +
+    "/gradebook?user_id=" + user_id);
+  // The result of the GET request is available in the json variable.
+  // We return it just like in a regular synchronous function.
+  return json;
   }
 
   render() {
-    console.log(this.state)
+    console.log("MyPage State:", this.state)
     return(
       <div>
         {this.props.isAuthed ?
@@ -67,7 +44,10 @@ class MyPage extends Component {
                   </Grid.Row>
                   <Grid.Row width={10}>
                     <Segment>
-                      <Gradebook grades={this.state.grades}/>
+                      <Gradebook
+                        grades={this.state.grades}
+                        user={this.props.user}
+                      />
                     </Segment>
                   </Grid.Row>
                 </Grid.Column>
