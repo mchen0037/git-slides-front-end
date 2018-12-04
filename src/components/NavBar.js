@@ -24,7 +24,6 @@ class NavBar extends Component {
   }
 
   async courseClicked(e, val) {
-    // console.log("You clicked on course: ", e.target.id, " " , e.target.innerText)
 
     let course_id = e.target.id;
     let course_name = e.target.innerText;

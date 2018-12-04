@@ -47,7 +47,7 @@ class Home extends Component {
   }
 
   render() {
-    console.log("Home State:" , this.state)
+    // console.log("Home State:" , this.state)
     // console.log("Home Props:" , this.props)
     return(
       <div>

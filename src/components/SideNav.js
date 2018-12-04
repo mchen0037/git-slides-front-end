@@ -40,7 +40,6 @@ class SideNav extends Component {
   async handleModuleClick(e, clickedModule) {
     //If we click on the same as the active module, close the accordion folder
     //Else, we want to set it to the new one.
-    console.log(clickedModule, this.state.activeModule)
     const index = clickedModule.index
     const activeModule = this.state.activeModule
     const newIndex = (activeModule === index) ? -1 : index
@@ -100,9 +99,6 @@ class SideNav extends Component {
     const activeItem = this.state.activeItem
     const newIndex = (activeItem === index) ? -1 : index
 
-    console.log("handleItemClick clickedItem", clickedItem)
-
-    //FIXME: hard coded now but please fix..
     let module_id = this.state.activeModule;
     let user_id = this.props.user.id;
     let course_id = this.props.course_id;
@@ -111,7 +107,6 @@ class SideNav extends Component {
       let presentation_id = clickedItem.index;
       let slideRequest = this.getSlides(user_id, course_id, module_id, presentation_id);
       slideRequest.then( res => {
-        console.log("Presentation Slide:", res.data)
         this.props.setSlide(res.data);
       })
     }
@@ -119,7 +114,6 @@ class SideNav extends Component {
       let exercise_id = clickedItem.index;
       let instructionsRequest = this.getInstructions(user_id, course_id, module_id, exercise_id);
       instructionsRequest.then( res => {
-        console.log("Exercise insructions:", res.data)
         this.props.setExercise(res.data);
       })
 

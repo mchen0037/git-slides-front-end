@@ -23,11 +23,11 @@ class Gradebook extends Component {
   }
 
   async componentDidMount() {
-    console.log("componentDidMount");
+    // console.log("componentDidMount");
     let user_id = this.props.user.id;
     let request = this.getGrades(user_id);
     request.then( res => {
-      console.log(res.data)
+      // console.log(res.data)
       this.setGrades(res.data);
     });
   }
@@ -38,7 +38,7 @@ class Gradebook extends Component {
   }
 
   render() {
-    console.log("Gradebook state:", this.state)
+    // console.log("Gradebook state:", this.state)
     return(
       <div>
         {/* FIXME: switch rows and columns? */}
@@ -53,7 +53,7 @@ class Gradebook extends Component {
           <Grid.Column>
             {this.state.grades.map((grade, index) =>
               <Grid.Row key={index}>
-                {grade.grade * 100}%
+                {Math.ceil(grade.grade * 100 * 100)/100}%
               </Grid.Row>
             )}
           </Grid.Column>

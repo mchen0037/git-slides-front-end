@@ -15,7 +15,7 @@ class MyPage extends Component {
   }
 
   render() {
-    console.log("MyPage State:", this.state)
+    // console.log("MyPage State:", this.state)
     return(
       <div>
         {this.props.isAuthed ?
