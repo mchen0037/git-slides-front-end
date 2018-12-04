@@ -32,11 +32,6 @@ class Home extends Component {
     })
   }
 
-  // setModules(modules) {
-  //   console.log("Setting Modules in Home!", modules)
-  //   this.setState({modules: modules})
-  // }
-
   setSlides(slides) {
     this.setState({
       slides: slides,
@@ -81,7 +76,7 @@ class Home extends Component {
                     </Grid.Column>
                     <Grid.Column width={12} style={{overflow: 'auto', maxHeight: 600 }}>
                       <BodyContent user={this.props.user}
-                        presentation={this.state.presentation}
+                        slides={this.state.slides}
                         exercise={this.state.exercise}
                       />
                     </Grid.Column>
