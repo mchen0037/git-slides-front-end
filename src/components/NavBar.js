@@ -12,15 +12,10 @@ class NavBar extends Component {
     this.courseClicked = this.courseClicked.bind(this);
     this.state = {
       courses: this.props.user.courses,
-      selectedCourse: this.props.selectedCourseName
     }
   }
 
-  componentWillReceiveProps() {
-    this.setState({selectedCourse: this.props.selectedCourseName})
-  }
-
-  async getJSONAsync(id, course){
+  async getCourseInfo(id, course){
   // The await keyword saves us from having to write a .then() block.
   let json = await axios.get(server + "/modules?user_id=" + id + "&course_id=" + course);
   // The result of the GET request is available in the json variable.
@@ -30,15 +25,18 @@ class NavBar extends Component {
 
   async courseClicked(e, val) {
     console.log("You clicked on course: ", e.target.id, " " , e.target.innerText)
-    this.props.currentCourse(e.target.id, e.target.innerText)
+
+    let course_id = e.target.id;
+    let course_name = e.target.innerText;
+
     this.setState({ selectedCourse: e.target.innerText})
 
-    var id = this.props.user.id
-    var course = e.target.id
+    var id = this.props.user.id;
+    var course = e.target.id;
 
-    let request = this.getJSONAsync(id,course);
-    request.then( res => {
-      this.props.updatemods(res.data);
+    let courseRequest = this.getCourseInfo(id,course);
+    courseRequest.then( res => {
+      this.props.handleClickedCourse(course_id, course_name, res.data);
     });
   }
 
@@ -57,8 +55,8 @@ class NavBar extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullLeft>
-            {this.state.courses[0] && typeof this.props.currentCourse  === "function" &&
-              <NavDropdown eventKey={1} title={this.state.selectedCourse} id="basic-nav-dropdown">
+            {this.state.courses[0] && typeof this.props.handleClickedCourse  === "function" &&
+              <NavDropdown eventKey={1} title={this.props.selectedCourseName} id="basic-nav-dropdown">
                 {this.state.courses.map( course =>
                   <MenuItem
                     key={course.id}

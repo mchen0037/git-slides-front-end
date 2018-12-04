@@ -10,27 +10,30 @@ class Home extends Component {
 
   constructor(props) {
     super(props)
-    this.setModules = this.setModules.bind(this);
-    this.setCurrentCourse = this.setCurrentCourse.bind(this);
+    // this.setModules = this.setModules.bind(this);
+    this.clickedCourse = this.clickedCourse.bind(this);
     this.state = {
       // courses: [],
       modules: [],
       selectedCourseName: "Courses",
-      //When someone clicks on a module, update the state's presentation.
       presentation: {
         slides: []
       }
     }
   }
-  //course_id from database
-  setCurrentCourse(course_id, course_name) {
-    this.setState( {current_course_id: course_id, selectedCourseName: course_name})
+  clickedCourse(course_id, course_name, modules) {
+    console.log("setting state for lots of stuff");
+    this.setState( {
+      current_course_id: course_id,
+      selectedCourseName: course_name,
+      modules: modules
+    })
   }
 
-  setModules(modules) {
-    // console.log("Setting Modules in Home!", modules)
-    this.setState({modules: modules})
-  }
+  // setModules(modules) {
+  //   console.log("Setting Modules in Home!", modules)
+  //   this.setState({modules: modules})
+  // }
 
   //TODO: helloo
   // setPresentation(modules) {
@@ -50,7 +53,8 @@ class Home extends Component {
           <div>
             <NavBar
               user={this.props.user}
-              currentCourse={(course_id, course_name) => this.setCurrentCourse(course_id, course_name)}
+              handleClickedCourse={(course_id, course_name, modules) =>
+                this.clickedCourse(course_id, course_name, modules)}
               updatemods={(modules) => {this.setModules(modules)}}
               selectedCourseName={this.state.selectedCourseName}
             />
@@ -69,7 +73,6 @@ class Home extends Component {
                     <Grid.Column width={12} style={{overflow: 'auto', maxHeight: 600 }}>
                       <BodyContent user={this.props.user}
                         presentation={this.state.presentation}
-
                       />
                     </Grid.Column>
                   </Grid.Row>

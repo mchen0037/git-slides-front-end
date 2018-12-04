@@ -13,7 +13,6 @@ class SideNav extends Component {
       activeModule: -1,
       activeItem: -1,
       course_id: this.props.course_id,
-      course: this.props.user.courses[0],
       modules: this.props.modules,
       presentations: [],
       exercises: []
@@ -45,15 +44,11 @@ class SideNav extends Component {
     const activeModule = this.state.activeModule
     const newIndex = (activeModule === index) ? -1 : index
 
-    // console.log(index)
-    // console.log(activeModule)
-    // console.log(newIndex)
     console.log("handleModuleClick props:", this.props)
     if (newIndex !== -1) {
+
       let module_id = this.props.modules[newIndex].module_id;
-      //fix this hardcoded 0 because you need to pass in the selected course id.
       let course_id = this.props.course_id;
-      // let course_id = this.props.courses[0].id;
       let user_id = this.props.user.id;
 
       let exerciseRequest = this.getExercises(user_id, course_id, module_id);
@@ -126,21 +121,11 @@ class SideNav extends Component {
       });
   }
 
-  componentWillReceiveProps() {
-    console.log(this.props)
-    this.setState({modules: this.props.modules})
-  }
-
-  // TODO: get modules based on state.course_id.
-  // get exercises and presentations for each module.
-  // componentDidMount() {
-  // }
-
   render() {
     console.log("SideNav State: ", this.state)
     return (
       <Accordion as={Menu} vertical>
-        {this.state.modules.map( (module, index) =>
+        {this.props.modules.map( (module, index) =>
           //FIXME: menu item and accordion title have same key..?
           <Menu.Item key={index + 1000}>
             <Accordion.Title
