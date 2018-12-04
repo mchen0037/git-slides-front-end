@@ -159,10 +159,10 @@ class SideNav extends Component {
                     <Menu.Menu>
                       {this.state.presentations.map( (presentation, index) =>
                           <Menu.Item
-                            index={index + 100}
-                            key={index + 100}
-                            active={this.state.activeItem === index + 100}
-                            content={presentation}
+                            index={presentation.presentation_id}
+                            key={presentation.presentation_id}
+                            active={this.state.activeItem === presentation.presentation_id}
+                            content={presentation.presentation_file}
                             onClick={this.handleItemClick}
                           />
                       )}
@@ -173,10 +173,10 @@ class SideNav extends Component {
                       <Menu.Menu>
                         {this.state.exercises.map( (exercise, index) =>
                             <Menu.Item
-                              index={index + 200}
-                              key={index + 200}
-                              active={this.state.activeItem === index + 200}
-                              content={exercise}
+                              index={exercise.exercise_id}
+                              key={exercise.exercise_id}
+                              active={this.state.activeItem === exercise.exercise_id}
+                              content={exercise.exercise_title}
                               onClick={this.handleItemClick}
                             />
                         )}
