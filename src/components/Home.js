@@ -42,7 +42,7 @@ class Home extends Component {
   // }
 
   render() {
-    // console.log("Home State:" , this.state)
+    console.log("Home State:" , this.state)
     // console.log("Home Props:" , this.props)
     return(
       <div>
@@ -63,6 +63,7 @@ class Home extends Component {
                       <SideNav
                         user={this.props.user}
                         modules={this.state.modules}
+                        course_id={this.state.current_course_id}
                       />
                     </Grid.Column>
                     <Grid.Column width={12} style={{overflow: 'auto', maxHeight: 600 }}>

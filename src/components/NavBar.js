@@ -28,12 +28,10 @@ class NavBar extends Component {
   return json;
   }
 
-
   async courseClicked(e, val) {
-    // console.log("<<<<<<<<<<<<<<<<<<<<courseClicked props:", this.props)
+    console.log("You clicked on course: ", e.target.id, " " , e.target.innerText)
     this.props.currentCourse(e.target.id, e.target.innerText)
     this.setState({ selectedCourse: e.target.innerText})
-    // QUERY FOR THE COURSE INFO FOR THAT CLASS.
 
     var id = this.props.user.id
     var course = e.target.id

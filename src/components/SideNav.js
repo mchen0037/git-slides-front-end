@@ -22,7 +22,23 @@ class SideNav extends Component {
     this.handleItemClick = this.handleItemClick.bind(this);
   }
 
-  handleModuleClick(e, clickedModule) {
+  async getExercises(user_id, course_id, module_id){
+    let json = await axios.get(server + "/exercise?user_id=" + user_id +
+      "&course_id=" + course_id +
+      "&module_id=" + module_id);
+
+    return json;
+  }
+
+  async getPresentations(user_id, course_id, module_id) {
+    let json = await axios.get(server + "/presentation?user_id=" + user_id +
+      "&course_id=" + course_id +
+      "&module_id=" + module_id);
+
+    return json;
+  }
+
+  async handleModuleClick(e, clickedModule) {
     //If we click on the same as the active module, close the accordion folder
     //Else, we want to set it to the new one.
     const index = clickedModule.index
@@ -32,34 +48,40 @@ class SideNav extends Component {
     // console.log(index)
     // console.log(activeModule)
     // console.log(newIndex)
-    // console.log(this.props)
+    console.log("handleModuleClick props:", this.props)
     if (newIndex !== -1) {
-      let module_id = this.props.user.modules[newIndex].module_id;
+      let module_id = this.props.modules[newIndex].module_id;
       //fix this hardcoded 0 because you need to pass in the selected course id.
-      let course_id = this.props.user.courses[0].id;
+      let course_id = this.props.course_id;
+      // let course_id = this.props.courses[0].id;
       let user_id = this.props.user.id;
 
-      axios.get(server + "/exercise?user_id=" + user_id +
-      "&course_id=" + course_id +
-      "&module_id=" + module_id)
-        .then(function(res){
-          // console.log("EXERCISES:", res.data)
-          // console.log("NavBar/courseClicked I GOT THE MODULES:", res.data)
-          // this.props.updatemods(res.data)
-          // console.log("setMods called.")
-        });
+      let exerciseRequest = this.getExercises(user_id, course_id, module_id);
+      exerciseRequest.then(res => {
+        this.setExercises(res.data);
+      });
 
-      axios.get(server + "/presentation?user_id=" + user_id +
-      "&course_id=" + course_id +
-      "&module_id=" + module_id)
-        .then(function(res){
-          // console.log(res.data)
-          this.setState({presentations: res.data})
-          // console.log("set the state!")
-        });
+      let presentationRequest = this.getPresentations(user_id, course_id, module_id);
+      presentationRequest.then(res => {
+        console.log("presentations:", res.data);
+        this.setPresentations(res.data);
+      });
+
+      this.setState({activeModule: newIndex});
     }
+  }
 
-    this.setState({activeModule: newIndex})
+  setExercises(exercises) {
+    this.setState({
+      exercises: exercises
+    });
+  }
+
+  setPresentations(presentations) {
+    console.log("setting presentations to: ", presentations)
+    this.setState({
+      presentations: presentations
+    });
   }
 
   handleItemClick(e, clickedItem) {
@@ -115,7 +137,7 @@ class SideNav extends Component {
   // }
 
   render() {
-    // console.log("SideNav State: ", this.state)
+    console.log("SideNav State: ", this.state)
     return (
       <Accordion as={Menu} vertical>
         {this.state.modules.map( (module, index) =>
@@ -136,12 +158,11 @@ class SideNav extends Component {
                     <Menu.Header>Presentations</Menu.Header>
                     <Menu.Menu>
                       {this.state.presentations.map( (presentation, index) =>
-                        module.module_id === presentation.module_id &&
                           <Menu.Item
                             index={index + 100}
                             key={index + 100}
                             active={this.state.activeItem === index + 100}
-                            content={presentation.title}
+                            content={presentation}
                             onClick={this.handleItemClick}
                           />
                       )}
@@ -151,12 +172,11 @@ class SideNav extends Component {
                     <Menu.Header>Exercises</Menu.Header>
                       <Menu.Menu>
                         {this.state.exercises.map( (exercise, index) =>
-                          module.module_id === exercise.module_id &&
                             <Menu.Item
                               index={index + 200}
                               key={index + 200}
                               active={this.state.activeItem === index + 200}
-                              content={exercise.name}
+                              content={exercise}
                               onClick={this.handleItemClick}
                             />
                         )}
