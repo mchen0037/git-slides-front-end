@@ -4,10 +4,10 @@ import NavBar from './NavBar.js';
 import { Container, Grid, Segment } from 'semantic-ui-react'
 import Gradebook from './Gradebook.js';
 import Profile from './Profile.js';
-import axios from 'axios';
+// import axios from 'axios';
 
 // let server = "http://172.20.10.2:4000"
-let server = "http://0.0.0.0:4000";
+// let server = "http://0.0.0.0:4000";
 
 class MyPage extends Component {
 
@@ -18,14 +18,14 @@ class MyPage extends Component {
     })
   }
 
-  async getGrades(user_id){
-  // The await keyword saves us from having to write a .then() block.
-  let json = await axios.get(server +
-    "/gradebook?user_id=" + user_id);
-  // The result of the GET request is available in the json variable.
-  // We return it just like in a regular synchronous function.
-  return json;
-  }
+  // async getGrades(user_id){
+  // // The await keyword saves us from having to write a .then() block.
+  // let json = await axios.get(server +
+  //   "/gradebook?user_id=" + user_id);
+  // // The result of the GET request is available in the json variable.
+  // // We return it just like in a regular synchronous function.
+  // return json;
+  // }
 
   render() {
     console.log("MyPage State:", this.state)

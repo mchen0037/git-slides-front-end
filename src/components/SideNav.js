@@ -45,7 +45,6 @@ class SideNav extends Component {
     const activeModule = this.state.activeModule
     const newIndex = (activeModule === index) ? -1 : index
 
-    // console.log("handleModuleClick props:", this.props)
     if (newIndex !== -1) {
 
       let module_id = clickedModule.index;
@@ -59,12 +58,10 @@ class SideNav extends Component {
 
       let presentationRequest = this.getPresentations(user_id, course_id, module_id);
       presentationRequest.then(res => {
-        // console.log("presentations:", res.data);
         this.setPresentations(res.data);
       });
-
-      this.setState({activeModule: newIndex});
     }
+    this.setState({activeModule: newIndex});
   }
 
   setExercises(exercises) {
@@ -74,57 +71,65 @@ class SideNav extends Component {
   }
 
   setPresentations(presentations) {
-    // console.log("setting presentations to: ", presentations)
     this.setState({
       presentations: presentations
     });
   }
 
-  handleItemClick(e, clickedItem) {
-    //If we click on the same as the active module, close the accordion folder
-    //Else, we want to set it to the new one.
+  async getSlides(user_id, course_id, module_id, presentation_id) {
+    let json = await axios.get(server + "/slides?user_id=" + user_id +
+      "&course_id=" + course_id +
+      "&module_id=" + module_id +
+      "&presentation_id=" + presentation_id);
+    return json;
+  }
+
+  async getInstructions(user_id, course_id, module_id, exercise_id) {
+    let json = await axios.get(server + "/exercise/instructions?user_id=" + user_id +
+      "&course_id=" + course_id +
+      "&module_id=" + module_id +
+      "&exercise_id=" + exercise_id);
+    return json;
+  }
+
+  async handleItemClick(e, clickedItem) {
+    const isPresentation = (e.target.attributes.ispresentation.nodeValue === "1")
+     ? true : false;
+
     const index = clickedItem.index
     const activeItem = this.state.activeItem
     const newIndex = (activeItem === index) ? -1 : index
 
-    this.setState({activeItem: newIndex})
+    console.log("handleItemClick clickedItem", clickedItem)
 
     //FIXME: hard coded now but please fix..
-    let module_id = 41;
-    let user_id = 1;
-    let course_id = 21;
-    let presentation_id = 41;
+    let module_id = this.state.activeModule;
+    let user_id = this.props.user.id;
+    let course_id = this.props.course_id;
 
-    // TODO: update the Presentation BODY whenever you click on a presentation or exercise.
-    //TODO: How to differentiate between exercise and presentation??
-    axios.get(server + "/slides?user_id=" + user_id +
-    "&course_id=" + course_id +
-    "&module_id=" + module_id +
-    "&presentation_id=" + presentation_id)
-      .then(function(res){
-        // console.log("EXERCISES:", res.data)
-        // console.log("NavBar/courseClicked I GOT THE MODULES:", res.data)
-        // this.props.updatemods(res.data)
-        // console.log("setMods called.")
-      });
+    if (isPresentation) {
+      let presentation_id = clickedItem.index;
+      let slideRequest = this.getSlides(user_id, course_id, module_id, presentation_id);
+      slideRequest.then( res => {
+        console.log("Presentation Slide:", res.data)
+        //set state for slides.
+      })
+    }
+    else {
+      let exercise_id = clickedItem.index;
+      let instructionsRequest = this.getInstructions(user_id, course_id, module_id, exercise_id);
+      instructionsRequest.then( res => {
+        console.log("Exercise insructions:", res.data)
+        //set state for exercises.
+      })
 
-    let exercise_id = 81;
-    //TODO: Same as above but for exercises?
-    axios.get(server + "/exercise/instructions?user_id=" + user_id +
-    "&course_id=" + course_id +
-    "&module_id=" + module_id +
-    "&exercise_id=" + exercise_id)
-      .then(function(res){
-        // console.log("EXERCISES:", res.data)
-        // console.log("NavBar/courseClicked I GOT THE MODULES:", res.data)
-        // this.props.updatemods(res.data)
-        // console.log("setMods called.")
-      });
-  }
+    }
+    this.setState({activeItem: newIndex})
+}
 
   render() {
     // console.log("SideNav State: ", this.state)
-    console.log("SideNav props", this.props)
+    // console.log("SideNav props", this.props)
     return (
       <Accordion as={Menu} vertical>
         {this.props.modules.map( (module) =>
@@ -151,6 +156,7 @@ class SideNav extends Component {
                             active={this.state.activeItem === presentation.presentation_id}
                             content={presentation.presentation_file}
                             onClick={this.handleItemClick}
+                            ispresentation={1}
                           />
                       )}
                     </Menu.Menu>
@@ -165,6 +171,7 @@ class SideNav extends Component {
                               active={this.state.activeItem === exercise.exercise_id}
                               content={exercise.exercise_title}
                               onClick={this.handleItemClick}
+                              ispresentation={0}
                             />
                         )}
                     </Menu.Menu>
