@@ -112,7 +112,7 @@ class SideNav extends Component {
       let slideRequest = this.getSlides(user_id, course_id, module_id, presentation_id);
       slideRequest.then( res => {
         console.log("Presentation Slide:", res.data)
-        //set state for slides.
+        this.props.setSlide(res.data);
       })
     }
     else {
@@ -120,12 +120,13 @@ class SideNav extends Component {
       let instructionsRequest = this.getInstructions(user_id, course_id, module_id, exercise_id);
       instructionsRequest.then( res => {
         console.log("Exercise insructions:", res.data)
-        //set state for exercises.
+        this.props.setExercise(res.data);
       })
 
     }
     this.setState({activeItem: newIndex})
-}
+  }
+
 
   render() {
     // console.log("SideNav State: ", this.state)

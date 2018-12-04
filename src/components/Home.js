@@ -12,13 +12,15 @@ class Home extends Component {
     super(props)
     // this.setModules = this.setModules.bind(this);
     this.clickedCourse = this.clickedCourse.bind(this);
+    this.setSlides = this.setSlides.bind(this);
+    this.setExercise = this.setExercise.bind(this);
     this.state = {
       // courses: [],
       modules: [],
       selectedCourseName: "Courses",
-      presentation: {
-        slides: []
-      }
+      presentation: {},
+      slides: [],
+      exercise: {}
     }
   }
   clickedCourse(course_id, course_name, modules) {
@@ -35,17 +37,22 @@ class Home extends Component {
   //   this.setState({modules: modules})
   // }
 
-  //TODO: helloo
-  // setPresentation(modules) {
-  //
-  // }
-  //
-  // setSlides() {
-  //
-  // }
+  setSlides(slides) {
+    this.setState({
+      slides: slides,
+      exercise: {}
+    });
+  }
+
+  setExercise(exercise) {
+    this.setState({
+      slides: [],
+      exercise: exercise
+    });
+  }
 
   render() {
-    // console.log("Home State:" , this.state)
+    console.log("Home State:" , this.state)
     // console.log("Home Props:" , this.props)
     return(
       <div>
@@ -68,11 +75,14 @@ class Home extends Component {
                         user={this.props.user}
                         modules={this.state.modules}
                         course_id={this.state.current_course_id}
+                        setSlide={(slides) => {this.setSlides(slides)}}
+                        setExercise={(exercise) => {this.setExercise(exercise)}}
                       />
                     </Grid.Column>
                     <Grid.Column width={12} style={{overflow: 'auto', maxHeight: 600 }}>
                       <BodyContent user={this.props.user}
                         presentation={this.state.presentation}
+                        exercise={this.state.exercise}
                       />
                     </Grid.Column>
                   </Grid.Row>
