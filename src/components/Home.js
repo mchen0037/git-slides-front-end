@@ -22,7 +22,7 @@ class Home extends Component {
     }
   }
   clickedCourse(course_id, course_name, modules) {
-    console.log("setting state for lots of stuff");
+    // console.log("setting state for lots of stuff");
     this.setState( {
       current_course_id: course_id,
       selectedCourseName: course_name,
@@ -45,7 +45,7 @@ class Home extends Component {
   // }
 
   render() {
-    console.log("Home State:" , this.state)
+    // console.log("Home State:" , this.state)
     // console.log("Home Props:" , this.props)
     return(
       <div>

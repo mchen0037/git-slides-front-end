@@ -40,14 +40,15 @@ class SideNav extends Component {
   async handleModuleClick(e, clickedModule) {
     //If we click on the same as the active module, close the accordion folder
     //Else, we want to set it to the new one.
+    console.log(clickedModule, this.state.activeModule)
     const index = clickedModule.index
     const activeModule = this.state.activeModule
     const newIndex = (activeModule === index) ? -1 : index
 
-    console.log("handleModuleClick props:", this.props)
+    // console.log("handleModuleClick props:", this.props)
     if (newIndex !== -1) {
 
-      let module_id = this.props.modules[newIndex].module_id;
+      let module_id = clickedModule.index;
       let course_id = this.props.course_id;
       let user_id = this.props.user.id;
 
@@ -58,7 +59,7 @@ class SideNav extends Component {
 
       let presentationRequest = this.getPresentations(user_id, course_id, module_id);
       presentationRequest.then(res => {
-        console.log("presentations:", res.data);
+        // console.log("presentations:", res.data);
         this.setPresentations(res.data);
       });
 
@@ -73,7 +74,7 @@ class SideNav extends Component {
   }
 
   setPresentations(presentations) {
-    console.log("setting presentations to: ", presentations)
+    // console.log("setting presentations to: ", presentations)
     this.setState({
       presentations: presentations
     });
@@ -122,27 +123,28 @@ class SideNav extends Component {
   }
 
   render() {
-    console.log("SideNav State: ", this.state)
+    // console.log("SideNav State: ", this.state)
+    console.log("SideNav props", this.props)
     return (
       <Accordion as={Menu} vertical>
-        {this.props.modules.map( (module, index) =>
+        {this.props.modules.map( (module) =>
           //FIXME: menu item and accordion title have same key..?
-          <Menu.Item key={index + 1000}>
+          <Menu.Item key={module.module_id}>
             <Accordion.Title
-              index={index}
-              key={index}
-              active={this.state.activeModule === index}
+              index={module.module_id}
+              key={module.module_id}
+              active={this.state.activeModule === module.module_id}
               content={module.name}
               onClick={this.handleModuleClick}
             />
             <Accordion.Content
-              active={this.state.activeModule === index}
+              active={this.state.activeModule === module.module_id}
               content={
                 <Menu vertical fluid>
                   <Menu.Item>
                     <Menu.Header>Presentations</Menu.Header>
                     <Menu.Menu>
-                      {this.state.presentations.map( (presentation, index) =>
+                      {this.state.presentations.map( (presentation) =>
                           <Menu.Item
                             index={presentation.presentation_id}
                             key={presentation.presentation_id}
@@ -156,7 +158,7 @@ class SideNav extends Component {
                   <Menu.Item>
                     <Menu.Header>Exercises</Menu.Header>
                       <Menu.Menu>
-                        {this.state.exercises.map( (exercise, index) =>
+                        {this.state.exercises.map( (exercise) =>
                             <Menu.Item
                               index={exercise.exercise_id}
                               key={exercise.exercise_id}
